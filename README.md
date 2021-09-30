@@ -1,4 +1,4 @@
-### Use Docker with Flask + Redis
+### Docker with Flask + Redis
  Simple flask app that counts web site visits and stored in a default Redis backend.
 
 #### Setup
