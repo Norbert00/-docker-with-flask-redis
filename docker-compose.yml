@@ -1,0 +1,32 @@
+version: "3"
+
+services:
+  # Run the web container with python app
+  web:
+    # Build container from the Dockerfile
+    build: .
+    container_name: "python_app"
+    # Declare the ports on host and container
+    ports:
+      - "${PYTHON_APP_PORT}:8000"
+    depends_on:
+      - "redis"
+    # Set the enviroment variables
+    environment:
+      REDIS_HOST: "redis"
+      REDIS_PORT: "${REDIS_PORT}"
+  
+  # Run redis server
+  redis:
+    # Declare the redis image version
+    image: "redis:${REDIS_VERSION}"
+    container_name: "redis"
+    # Declare the ports on host and container
+    ports: 
+      - "${REDIS_PORT}:6379"
+    # Declare the directory to store data on host and container
+    volumes:
+      - "redis_data:/data"
+
+volumes:
+    redis_data:
